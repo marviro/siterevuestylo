@@ -12,3 +12,5 @@ archive_bsp/
 TODO.md
 static/lampadaire.bib
 TODO
+.firebase/
+.vscode/
