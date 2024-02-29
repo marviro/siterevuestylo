@@ -103,7 +103,7 @@ def getpdf(article, myid, version):
     #                 }
     #     r = requests.get(url,params)
     #     z = zipfile.ZipFile(io.BytesIO(r.content))
-    #     # print("zipfile:" + z.filelist)
+    #     # print("zipfile:" + z.filelist)authors
     #     z.extractall("downloads")
     #     for file in z.filelist:
     #         new_file_name = f'{myid}.xml'
@@ -313,6 +313,14 @@ def getdisplay(authors, title):
 
     return names + title
 def formatnames(authors):
+    # names = authors
+    # for n in names:
+    #     if n + 1 != len(names):
+    #         names = names + n['name'] + ", "
+    #     elif n + 1 == len(names):
+    #         names = names + " et " + names[n + 1]
+    #     elif n == len(names):
+    #         return names
     names = " et ".join(author['name'] for author in authors)
     names += ", "
     return names
@@ -322,7 +330,11 @@ def formatnameslinks(authors):
     for author in authors:
         name = "<a href=" + "/auteurices/{}.html>{}</a>".format(author['authorslug'], author['author']["forname"] + " " + author['author']["surname"])
         names.append(name)
-    return ' et '.join(names) #doesnt work for 3+ authors
+    if len(names) > 2:
+        names = ", ".join(names[:-1]) + " et " + names[-1]
+    else:
+        names = " et ".join(names)
+    return names
 
 def retrieveauthors():
     authors_list=[]

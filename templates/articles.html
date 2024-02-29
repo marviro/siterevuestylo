@@ -30,7 +30,8 @@
                 <td><div style="width: 66.6%">{%if a['myid'] != ''%}<a href="../articles/{{a['myid']}}.html">{{a['title'] |
                         striptags}}</a><br>{%endif%}</div></td>
                 <td>{{a['authors'] | safe }}</td>
-                <td>{{a['keywords'] | safe}}</td>
+                {% set keywords_list = a['keywords'].split(',') %}
+				<td>{{ keywords_list[0]|safe }}</td>
                 <td>{{a['date']}}</td>
             </tr>
             {%endfor%}

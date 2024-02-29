@@ -200,11 +200,12 @@ def author(name):
 def dossiers(): # la fonction qui sert les données pour la route /
     if config.dynamic:
         data = tools.setdossiers()
+        appels = tools.retrievetags("appel")
     else:
         data = json.load(open('caches/dossiers.json','r'))
 
 
-    return render_template('dossiers.html', current_page='articles', title="Numéros - Lampadaire", data=data)
+    return render_template('dossiers.html', current_page='articles', title="Numéros - Lampadaire", data=data, appels=appels)
 
 @app.route('/dossiers/<idd>.html')
 def dossier(idd):

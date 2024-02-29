@@ -16,9 +16,20 @@
 
 	<h1>Numéros</h1>
 
-	
+	<table class="display">
+        {%for d in data | reverse %}
+        {% if d['dossier']['id'][3:5] != 'ht'%}
+        <tr>
+            <td >No. {{d['dossier']['id'][0:2]}}</td>
+            <td><a href="/{{d['dossier']['id']}}.html">{{d['dossier']['title_f']}}</a></td>
+            <td>{% for a in appels %}{% if a['myid'][0:2] == d['dossier']['id'][0:2] %}{% if a['yaml']['abstract'][0]['text_f'] != "" %}{{a['yaml']['abstract'][0]['text_f'][0:300]}}{%endif%}{%endif%}{%endfor%}</td>
+            <!-- <td>{% if d['dossier']['id'][3:5] != 'aa'%}{% for a in appels %}{% if a['myid'][0:2] == d['dossier']['id'][0:2] %}{% if a['yaml']['abstract'][0]['text_f'] != "" %}{{a['yaml']['abstract'][0]['text_f'][0:300]}}{%endif%}{%endif%}{%endfor%}{%endif%}{%if d['dossier']['id'][3:5] == 'aa' %}{{""}}{%endif%}</td> -->
+        </tr>
+        {%endif%}
+        {%endfor%}
+    </table>
 
-	{% for d in data | reverse %}
+	<!-- {% for d in data | reverse %}
     <table class="display">
         <tr style="font-size: large;">
 			<td >No. {{d['dossier']['id'][0:2]}}</td>
@@ -32,7 +43,7 @@
             </td>
         </tr>
     </table>
-{% endfor %}
+{% endfor %} -->
 	
 </div>
 	{% include "footer.html" %}

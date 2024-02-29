@@ -12,14 +12,16 @@
 		<div class="corps">
 		{% include "header.html" %}
 <h1>Mots-clés</h1>
-<table class="display">
+<table class="display-motscles">
 	{% for k in data %}
 		<tr>
 			<td><a href="{{k['nameslug']}}.html">{{k['name']}}</a></td>
 			<td>
-				{% for a in k['articles'] %}
+				{% for a in k['articles'][:3] %}
 				{%if a['myid'] == ''%}<a href="../articles/{{a['id']}}.html">{%else%}<a href="../articles/{{a['myid']}}.html">{%endif%}{{a['title']|striptags}}</a><br>
 				{% endfor %}
+				{% if (k['articles']|length) - 3 > 1%}<em>{{(k['articles']|length)-3}} autres articles...</em>{%endif%}
+				{% if (k['articles']|length) - 3 == 1%}<em>(1 autre article...)</em>{%endif%}
 			</td>
 		</tr>
 	{% endfor %}

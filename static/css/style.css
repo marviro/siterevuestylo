@@ -475,6 +475,45 @@ table.display td:nth-child(3) {
   /* adjust as needed */
 }
 
+table.display-motscles {
+  border-collapse: separate;
+  width: 100%;
+  border-spacing: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+
+}
+
+table.display-motscles td {
+  border-top: 2px solid #000;
+  /* padding-top: 1.5px; */
+  padding-bottom: 18px;
+}
+
+table.display-motscles td:nth-child(1) {
+  font-size: 25px;
+  font-weight: 700;
+  width: 10%;
+  vertical-align: top;
+  /* adjust as needed */
+}
+
+table.display-motscles td:nth-child(2) {
+  font-size: 30px;
+  font-weight: 700;
+  width: 55%;
+  vertical-align: top;
+  /* adjust as needed */
+}
+
+table.display-motscles td:nth-child(3) {
+  font-size: 25px;
+  font-weight: 700;
+  width: 35%;
+  /* adjust as needed */
+}
+
 table.display-articles {
   border-collapse: separate;
   font-size: 20px;
