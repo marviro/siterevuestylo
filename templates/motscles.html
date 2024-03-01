@@ -14,6 +14,7 @@
 <h1>Mots-clés</h1>
 <table class="display-motscles">
 	{% for k in data %}
+	{% if k['nameslug'] != 'aa' %}
 		<tr>
 			<td><a href="{{k['nameslug']}}.html">{{k['name']}}</a></td>
 			<td>
@@ -24,6 +25,7 @@
 				{% if (k['articles']|length) - 3 == 1%}<em>(1 autre article...)</em>{%endif%}
 			</td>
 		</tr>
+	{% endif %}
 	{% endfor %}
 	</table>
 </div>

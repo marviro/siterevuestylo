@@ -28,6 +28,7 @@
 <table class="display">
 	{%for d in dossiers | reverse %}
 	{% if d['dossier']['id'][3:5] != 'ht'%}
+	{% if d['dossier']['id'][0:2] != '00'%}
 	<tr>
 		<td >No. {{d['dossier']['id'][0:2]}}</td>
 		<td><a href="dossiers/{{d['dossier']['id']}}.html">{{d['dossier']['title_f']}}</a></td>
@@ -35,7 +36,14 @@
 		<!-- <td>{% if d['dossier']['id'][3:5] != 'aa'%}{% for a in appels %}{% if a['myid'][0:2] == d['dossier']['id'][0:2] %}{% if a['yaml']['abstract'][0]['text_f'] != "" %}{{a['yaml']['abstract'][0]['text_f'][0:300]}}{%endif%}{%endif%}{%endfor%}{%endif%}{%if d['dossier']['id'][3:5] == 'aa' %}{{""}}{%endif%}</td> -->
 	</tr>
 	{%endif%}
+	{%endif%}
 	{%endfor%}
+	<tr>
+		<td>No. 00</td>
+		<td><a href="a-propos.html">Présentation de la revue</a></td>
+		<td>Lampadaire publie des articles de vulgarisation philosophique dans le but d'ouvrir un espace de discussion et d'échanges au sein de la communauté philosophique du Québec et de promouvoir le travail de celle-ci auprès du grand public.</td>
+		<!-- <td>Lampadaire publie des articles de vulgarisation philosophique dans le but d&#39;ouvrir un espace de discussion et d&#39;échanges au sein de la communauté philosophique du Québec et de promouvoir le travail de celle-ci auprès du grand public.</td> -->
+	</tr>
 </table>
 
 </div>

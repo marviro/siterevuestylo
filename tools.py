@@ -70,25 +70,29 @@ def getartinfofromyaml(article,key):
 
 # fonction pour récuperer le pdf via l'export stylo. Si on crée un export pour femur, on pourra avoir un template particulier et récuperer aussi l'xml
 def getpdf(article, myid, version):
-    print("getting "+ myid)
-    url ="http://127.0.0.1:5000/lampadaire/export/stylo.huma-num.fr/"+article+"/"+myid+"/"
-    params = {
-                "with_toc": 0,
-                "with_ascii": 0,
-                "version": version,
-                "bibliography_style": "chicagomodified",
-                "formats": "pdf",
-                }
-    r = requests.get(url,params)
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall("downloads")
-    for file in z.filelist:
-        new_file_name = f'{myid}.pdf'
-        new_file_path = f'downloads/{new_file_name}'
-        if os.path.exists(new_file_path):
-            os.remove(new_file_path)
-        os.rename(f'downloads/{file.filename}', new_file_path)
-        print(file.filename.split('/')[0])
+    try:
+        print("getting "+ myid)
+        url ="http://127.0.0.1:5000/lampadaire/export/stylo.huma-num.fr/"+article+"/"+myid+"/"
+        params = {
+                    "with_toc": 0,
+                    "with_ascii": 0,
+                    "version": version,
+                    "bibliography_style": "chicagomodified",
+                    "formats": "pdf",
+                    }
+        r = requests.get(url,params)
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall("downloads")
+        for file in z.filelist:
+            new_file_name = f'{myid}.pdf'
+            new_file_path = f'downloads/{new_file_name}'
+            if os.path.exists(new_file_path):
+                os.remove(new_file_path)
+            os.rename(f'downloads/{file.filename}', new_file_path)
+            print(file.filename.split('/')[0])
+    except Exception as e:
+        print("An error occurred:", str(e))
+        pass
         
 # def getxml(article, myid, version):
     # try:

@@ -124,11 +124,15 @@
 		<!-- {%if yaml['rights']%}
 		<p><b>Licence:</b> {{yaml['rights']}}</p>
 		{%endif%} -->
+		
 		{%if yaml['keywords']%}
+		{%if myid[3:8] != "merci" %}
 		<p> <span><b>Mots-clés:</b> {% for k in yaml['keywords'] %}{%for n in k['list_f'] %} <a
 					href="../motscles/{{n[1]}}.html">{{n[0]}}</a>{% if not loop.last %},
 				{% endif %} {%endfor%}{%endfor%} </span></p>
 		{%endif%}
+		{%endif%}
+		
 
 		<h3><a href="../downloads/{{myid}}.pdf" download><i class="fa-solid fa-download"></i> Télécharger en PDF</a></h3>
 		<!-- <h2><a href="../xml/{{myid}}">XML de l'article</a></h2> -->

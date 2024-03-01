@@ -614,6 +614,11 @@ div.content {
   padding-top: 15px;
 }
 
+p.content {
+  font-size: 30px;
+  padding-top: 15px;
+}
+
 table.table-equal {
   border-collapse: separate;
 

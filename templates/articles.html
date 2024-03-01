@@ -31,7 +31,11 @@
                         striptags}}</a><br>{%endif%}</div></td>
                 <td>{{a['authors'] | safe }}</td>
                 {% set keywords_list = a['keywords'].split(',') %}
+                {% if keywords_list[0] != 'aa' %}
 				<td>{{ keywords_list[0]|safe }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
                 <td>{{a['date']}}</td>
             </tr>
             {%endfor%}

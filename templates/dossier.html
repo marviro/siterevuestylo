@@ -18,15 +18,19 @@
 
 		<!-- Liste articles: -->
 		<table class="display-articles">
-            {% for a in mydossier['articles'] | sort(attribute="keywords.0") %}
+            {% for a in mydossier['articles'] | sort(attribute="keywords") %}
             <tr>
                 <!-- <td>{{a['myid'][0:2]}}</td> -->
 				<td></td>
                 <td><div style="width: 66.6%">{%if a['myid'] != ''%}<a href="../articles/{{a['myid']}}.html">{{a['title'] |
                         striptags}}</a><br>{%endif%}</div></td>
-				<td>{{a['authors'] | safe }}</td>
+                <td>{{a['authors'] | safe }}</td>
                 {% set keywords_list = a['keywords'].split(',') %}
+                {% if keywords_list[0] != 'aa' %}
 				<td>{{ keywords_list[0]|safe }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
                 <td>{{a['date']}}</td>
             </tr>
             {%endfor%}
