@@ -24,8 +24,8 @@
         </ul>
 
         <table class="display-articles">
-            {%for d in dossiers | reverse %}
-            {% for a in d['articles'] | sort(attribute="title.3") %}
+            {%for d in dossiers%}
+            {% for a in d['articles'] | sort(attribute="keywords") %}
             <tr>
                 <td>No. {{d['dossier']['id'][0:2]}}</td>
                 <td><div style="width: 66.6%">{%if a['myid'] != ''%}<a href="../articles/{{a['myid']}}.html">{{a['title'] |

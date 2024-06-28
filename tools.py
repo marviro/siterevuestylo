@@ -8,6 +8,7 @@ import zipfile, io
 from slugify import slugify
 import traceback
 import os
+from operator import itemgetter, attrgetter
 
 endpoint = "https://stylo.huma-num.fr/graphql"
 headers = {"Authorization": f"Bearer {config.accessToken}"}
@@ -20,6 +21,9 @@ def yamltojs(myyaml):
     for source in sourcesyaml:
         sourcesjs.append(source)
     return sourcesjs
+
+def getContext(myid):
+    id = myid
 
 # fonction pour récuperer les données d'un article à partir de son id yaml
 def idfrommyid(myid):
@@ -398,7 +402,7 @@ def setkeywords():
     return liste_sd    
 def setdossiers():
     dossiers = retrievedossiers()
-    dossierssorted = sorted(dossiers, key=lambda k: k['dossier']['id']) 
+    dossierssorted = sortArticles()
     seen = []
     new_l = []
     for d in dossierssorted:
@@ -418,7 +422,41 @@ def setdossiers():
         liste_sd = sorted(liste_sd, key=lambda k: k['myid']) 
         dictd.update({'articles':liste_sd})        
         liste_dict_dossiers.append(dictd)    
-    return liste_dict_dossiers    
+    return liste_dict_dossiers
+
+def sortArticles():
+    dossiers = retrievedossiers()
+    # Sort by: Article Id, Keyword (rubrique), then by Dossier in reverse
+    dossierssorted = sorted(dossiers, key=lambda k: k['articles']['myid'])
+    dossierssorted2 = sorted(dossierssorted, key=lambda k: k['articles']['keywords'])
+    dossiers = sorted(dossierssorted2, key = lambda k: k['dossier']['id'], reverse=True)
+    return dossiers
+
+def getArticleContext(myid):
+    articles = sortArticles()
+
+    id_list = []
+    for i in articles:
+        id_list.append(i['articles']['myid'])
+    
+    artPosition = id_list.index(myid)
+    
+    try:
+        previous = id_list[artPosition - 1]
+    except:
+        previous = 0
+
+    try:
+        next = id_list[artPosition + 1]
+    except:
+        next = id_list[0]
+
+    context = {'previous': previous, 'next': next}
+
+    return context
+
+
+
 def setauthors():
     authors = retrieveauthors()
     authorssorted = sorted(authors, key=lambda k: k['author']['surname']) 

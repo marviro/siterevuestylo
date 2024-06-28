@@ -64,6 +64,7 @@ def article(myid):
     data=alldata[0]
     myid=alldata[1]
     yaml=alldata[2]
+
     try:
         keywords= yaml['keywords']
         
@@ -119,7 +120,11 @@ def article(myid):
     except:
         mydossier = ''
 
-    return render_template('article.html', current_page='article', myarticle=myarticle, data=data, yaml=yaml,title=title, abstract_fr=abstract_fr, abstract_en=abstract_en, authors=authors, myid=myid, mydossier=mydossier)
+    context = tools.getArticleContext(myid)
+    nextart = context['next']
+    prevart = context['previous']
+
+    return render_template('article.html', current_page='article', myarticle=myarticle, data=data, yaml=yaml,title=title, abstract_fr=abstract_fr, abstract_en=abstract_en, authors=authors, myid=myid, mydossier=mydossier, nextart=nextart, prevart=prevart)
 
 @app.route('/downloads/<myid>')
 def articlepdf(myid):

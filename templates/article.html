@@ -157,6 +157,18 @@
 		{{myarticle|safe}}
 
 	</div>
+	<ul class="menuArticles" style="margin-top: 20px; margin-bottom: 50px;">
+		{%if not prevart%}
+		<li style="margin-left: 0;  font-size: 25px; pointer-events: none"><a>Article précédent</a></li>
+		{%else%}
+		<li style="margin-left: 0;  font-size: 25px;"><a href="/articles/{{prevart}}.html">Article précédent</a></li>
+		{%endif%}
+		{%if not nextart%}
+		<li style="margin-left: 0;  font-size: 25px; pointer-events: none"><a>Article suivant</a></li>
+		{%else%}
+		<li style="margin-right: 0; font-size: 25px;"><a href="/articles/{{nextart}}.html">Article suivant</a></li>
+		{%endif%}
+	</ul>
 	</div>
 	{% include "footer.html" %}
 

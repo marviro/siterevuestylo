@@ -2,6 +2,7 @@ venv
 env.py
 articles
 build/
+archives/
 caches/
 __pycache__/
 .ipynb_checkpoints
