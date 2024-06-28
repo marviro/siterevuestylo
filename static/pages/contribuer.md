@@ -92,6 +92,8 @@ thématique du numéro à l'une ou l'autre des rubriques suivantes :
     acceptés dans cette section à la condition que le lien avec le
     dossier thématique soit présent et explicite.
 
+- [Cliquez ici pour consulter les critères d'évaluation.](static/grilles/erudite.pdf)
+
 #### Argumentée
 
 - Longueur des articles : 10 000 à 12 000 caractères espaces compris
@@ -103,6 +105,8 @@ thématique du numéro à l'une ou l'autre des rubriques suivantes :
     des publications des dossiers précédents de la revue dans cette
     rubrique.
 
+- [Cliquez ici pour consulter les critères d'évaluation.](static/grilles/argumentee.pdf)
+
 #### Créative
 
 - Longueur des articles : 1-3 pages ou 4 000 à 8 000 signes
@@ -111,7 +115,9 @@ thématique du numéro à l'une ou l'autre des rubriques suivantes :
     philosophiques de tout acabit soulevées par la thématique du
     dossier. Les propositions ayant une forme moins conventionnelle en
     philosophie sont encouragées (bande dessinée, fiction, poésie,
-    conte, etc.)..
+    conte, etc.).
+
+- [Cliquez ici pour consulter les critères d'évaluation.](static/grilles/creative.pdf)
 
 #### Collégiale
 
@@ -122,6 +128,8 @@ thématique du numéro à l'une ou l'autre des rubriques suivantes :
     thématique du dossier. L'objectif de cette rubrique est de fournir
     aux professeur-es du collégial du matériel adapté à leur pratique et
     accessible à leurs étudiant-es.
+
+- [Cliquez ici pour consulter les critères d'évaluation.](static/grilles/collegiale.pdf)
 
 ### Section hors thème
 

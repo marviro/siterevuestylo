@@ -34,7 +34,7 @@ def contribuer(): # la fonction qui sert les données pour la route /
     page = "static/pages/contribuer.md"
     contenu = pypandoc.convert_file(page, 'html', format='md')
 
-    return render_template('contribuer.html', current_page='contribuer', title=config.title, contenu=contenu)
+    return render_template('contribuer.html', current_page='contribuer', title="Contribuer - Lampadaire", contenu=contenu)
 
 @app.route('/a-propos.html') # route où seront servies ces données
 def aboutpage(): # la fonction qui sert les données pour la route /
@@ -236,7 +236,7 @@ def articles(): # la fonction qui sert les données pour la route /
     else:
         # TODO: fix ceci pour match avec les nouvelles fonctions
         data = json.load(open('caches/articles.json','r'))
-    return render_template('articles.html', current_page='articles', title=config.title, articles=articles, appels=appels, dossiers=dossiers, authors=authors)
+    return render_template('articles.html', current_page='articles', title="Articles - Lampadaire", articles=articles, appels=appels, dossiers=dossiers, authors=authors)
 
 @app.route('/appels/<myid>.html')
 def appel(myid):
