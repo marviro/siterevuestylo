@@ -77,17 +77,42 @@ def article(myid):
         kw_sl=[]
     try:
         authors= yaml['authors']
-        
         au_sl=[]
         for au in authors:
-            authorslug = slugify(au['surname'])+'-'+slugify(au['forname'])
-            au.update({'authorslug':authorslug})
-            au_sl.append(au)
-            
-        
+            try:
+                if 'surname' not in au:
+                    au.update({'surname':""})
+                    authorslug = slugify(au['forname'])
+                    au.update({'authorslug':authorslug})
+                    au_sl.append(au)
+                    continue
+                if 'forname' not in au:
+                    au.update({'forname':""})
+                    authorslug = slugify(au['surname'])
+                    au.update({'authorslug':authorslug})
+                    au_sl.append(au)
+                    continue
+
+                authorslug = slugify(au['surname'])+'-'+slugify(au['forname'])
+                au.update({'authorslug':authorslug})
+                au_sl.append(au)
+            except Exception as e:
+                if e == 'surname':
+                    au.update({'surname':""})
+                    authorslug = slugify(au['surname'])
+                    au.update({'authorslug':authorslug})
+                    au_sl.append(au)
+                    continue
+                if e == 'forname':
+                    au.update({'forname':""})
+                    authorslug = slugify(au['forname'])
+                    au.update({'authorslug':authorslug})
+                    au_sl.append(au)
+                    continue        
         # TODO: Ici, ajouter le display pour les noms d'auteurs multiples avec un "et"
-    except:
+    except Exception as e:
         au_sl=[]
+        print(e)
     yaml.update({'authors':au_sl})
     title = pypandoc.convert_text(yaml['title_f'], 'html', format='md') 
     try:
@@ -111,6 +136,7 @@ def article(myid):
             
     try:
         authors = yaml['authors']
+        print(authors)
     except:
         authors = [{'forname':'','name':'','orcid':''}]
     
@@ -196,10 +222,17 @@ def author(name):
     else:
         data = json.load(open('caches/authors.json','r'))
     myauthor={}
+    title = ""
     for a in data:
         if a['authorslug'] == name:
             myauthor = a
-    return render_template('author.html', current_page='articles', title= name + " - Lampadaire", author=myauthor)
+            break
+    if myauthor['author']['forname'] != "":
+        title += myauthor['author']['forname']
+        title += " "
+    if myauthor['author']['surname'] != "":
+        title += myauthor['author']['surname']
+    return render_template('author.html', current_page='articles', title= title + " - Lampadaire", author=myauthor)
 
 @app.route('/dossiers/index.html') # route où seront servies ces données
 def dossiers(): # la fonction qui sert les données pour la route /

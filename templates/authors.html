@@ -21,7 +21,7 @@
 			<tr>
 				<td>
 					<a href="{{a['authorslug']}}.html">
-						{{a['author']['forname']}} {{a['author']['surname']}} {%if a['author']['affiliations']%} ({{a['author']['affiliations']}}){%endif%}</a>
+						{%if a['author']['forname']%}{{a['author']['forname']}} {%endif%}{%if a['author']['surname']%}{{a['author']['surname']}}{%endif%} {%if a['author']['affiliations']%} ({{a['author']['affiliations']}}){%endif%}</a>
 				</td>
 				<td>
 					{% for art in a['articles'] %}{%if art['myid'] == ''%}

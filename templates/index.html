@@ -33,7 +33,7 @@
 <a href="dossiers/index.html">Dossiers</a> -->
 
 <table class="display">
-	{%for d in dossiers | reverse %}
+	{%for d in dossiers%}
 	{% if d['dossier']['id'][3:5] != 'ht'%}
 	{% if d['dossier']['id'][0:2] != '00'%}
 	<tr>

@@ -354,9 +354,19 @@ def retrieveauthors():
             for author in authors:
                 title= article['title']
                 articles_list={'myid':myid,'id':article_id, 'title':title}
-                authornslug = slugify(author['surname'])
-                authorfslug = slugify(author['forname'])
-                authorslug= authornslug+'-'+authorfslug
+                if 'surname' not in author or author['surname'] == "":
+                    author.update({'surname':""})
+                    authorslug = slugify(author['forname'])
+                    print(authorslug)
+                if 'forname' not in author or author['forname'] == "":
+                    author.update({'forname':""})
+                    authorslug = slugify(author['surname'])
+                    print(authorslug)
+                if author['forname'] and author['surname'] != "":
+                    authornslug = slugify(author['surname'])
+                    authorfslug = slugify(author['forname'])
+                    authorslug= authornslug+'-'+authorfslug
+                    print(authorslug)
                 dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
                 authors_list.append(dictauthor)
         except:
@@ -374,12 +384,24 @@ def makeauthors(article):
         for author in authors:
             title= article['title']
             articles_list={'myid':myid,'id':article_id, 'title':title}
-            authornslug = slugify(author['surname'])
-            authorfslug = slugify(author['forname'])
-            authorslug= authornslug+'-'+authorfslug
+            if 'surname' not in author or author['surname'] == "":
+                author.update({'surname':""})
+                authorslug = slugify(author['forname'])
+                print(authorslug)
+            if 'forname' not in author or author['forname'] == "":
+                author.update({'forname':""})
+                authorslug = slugify(author['surname'])
+                print(authorslug)
+            if author['forname'] and author['surname'] != "":
+                authornslug = slugify(author['surname'])
+                authorfslug = slugify(author['forname'])
+                authorslug= authornslug+'-'+authorfslug
+                print(authorslug)
             dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
             authors_list.append(dictauthor)
-    except:
+    except Exception as e:
+        print("Exception:")
+        print(e)
         pass
      
     return authors_list
@@ -460,19 +482,32 @@ def getArticleContext(myid):
 def setauthors():
     authors = retrieveauthors()
     authorssorted = sorted(authors, key=lambda k: k['author']['surname']) 
+    print(authorssorted)
     seen = []
     new_l = []
     for a in authorssorted:
-        if (a['author']['forname'], a['author']['surname']) not in seen: ## attention: ça marche pas s'il y a des homonimes (même nom, même prénom)
+        if 'surname' not in a['author']:
+            a['author'].update({'surname':""})
+        if 'forname' not in a['author']:
+            a['author'].update({'forname':""})
+        if (a['author']['forname'], a['author']['surname']) not in seen: ## attention: ça marche pas s'il y a des homonymes (même nom, même prénom)
             seen.append((a['author']['forname'], a['author']['surname']))
             new_l.append(a['author'])
     liste_dict_authors= []
     for a in new_l:
-        liste_sd = []        
+        liste_sd = []
+
         dicta={'author':a}
         for i in authorssorted:
             if i['author']['forname'] == a['forname'] and i['author']['surname'] == a['surname']:
+                # try:
+                #     if a['author']['forname'] is None or a['author']['forname'] == "":
+                #         print("Null forname")
+                # except Exception as e:
+                #     print(e)
+                #     continue
                 liste_sd.append(i['articles'])
+                print("Will fail?")
                 dicta.update({'authorslug': i['authorslug']})
                 try: 
                     bio = pypandoc.convert_text(i['author']['biography'], 'html', format='md') 
@@ -481,9 +516,10 @@ def setauthors():
 
                 except KeyError:
                     continue
+        print("Nope!")
         liste_sd = sorted(liste_sd, key=lambda k: k['myid']) 
         dicta.update({'articles':liste_sd})        
-        liste_dict_authors.append(dicta)    
+        liste_dict_authors.append(dicta)
     return liste_dict_authors    
 
 def renameFiles(name, type, path):
