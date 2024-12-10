@@ -357,16 +357,16 @@ def retrieveauthors():
                 if 'surname' not in author or author['surname'] == "":
                     author.update({'surname':""})
                     authorslug = slugify(author['forname'])
-                    print(authorslug)
+                    # print(authorslug)
                 if 'forname' not in author or author['forname'] == "":
                     author.update({'forname':""})
                     authorslug = slugify(author['surname'])
-                    print(authorslug)
+                    # print(authorslug)
                 if author['forname'] and author['surname'] != "":
                     authornslug = slugify(author['surname'])
                     authorfslug = slugify(author['forname'])
                     authorslug= authornslug+'-'+authorfslug
-                    print(authorslug)
+                    # print(authorslug)
                 dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
                 authors_list.append(dictauthor)
         except:
@@ -387,16 +387,16 @@ def makeauthors(article):
             if 'surname' not in author or author['surname'] == "":
                 author.update({'surname':""})
                 authorslug = slugify(author['forname'])
-                print(authorslug)
+                # print(authorslug)
             if 'forname' not in author or author['forname'] == "":
                 author.update({'forname':""})
                 authorslug = slugify(author['surname'])
-                print(authorslug)
+                # print(authorslug)
             if author['forname'] and author['surname'] != "":
                 authornslug = slugify(author['surname'])
                 authorfslug = slugify(author['forname'])
                 authorslug= authornslug+'-'+authorfslug
-                print(authorslug)
+                # print(authorslug)
             dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
             authors_list.append(dictauthor)
     except Exception as e:
@@ -454,8 +454,18 @@ def sortArticles():
     dossiers = sorted(dossierssorted2, key = lambda k: k['dossier']['id'], reverse=True)
     return dossiers
 
+def sortArticlesContext():
+    dossiers = retrievedossiers()
+    # Sort by: Article Id, Keyword (rubrique), then by Dossier
+    dossierssorted = sorted(dossiers, key=lambda k: k['articles']['myid'])
+    dossierssorted2 = sorted(dossierssorted, key=lambda k: k['articles']['keywords'])
+    dossiers = sorted(dossierssorted2, key = lambda k: k['dossier']['id'])
+    # for i in dossiers:
+    #     print(i['dossier']['id'])
+    return dossiers
+
 def getArticleContext(myid):
-    articles = sortArticles()
+    articles = sortArticlesContext()
 
     id_list = []
     for i in articles:
@@ -482,7 +492,7 @@ def getArticleContext(myid):
 def setauthors():
     authors = retrieveauthors()
     authorssorted = sorted(authors, key=lambda k: k['author']['surname']) 
-    print(authorssorted)
+    # print(authorssorted)
     seen = []
     new_l = []
     for a in authorssorted:
@@ -507,7 +517,7 @@ def setauthors():
                 #     print(e)
                 #     continue
                 liste_sd.append(i['articles'])
-                print("Will fail?")
+                # print("Will fail?")
                 dicta.update({'authorslug': i['authorslug']})
                 try: 
                     bio = pypandoc.convert_text(i['author']['biography'], 'html', format='md') 
@@ -516,7 +526,7 @@ def setauthors():
 
                 except KeyError:
                     continue
-        print("Nope!")
+        # print("Nope!")
         liste_sd = sorted(liste_sd, key=lambda k: k['myid']) 
         dicta.update({'articles':liste_sd})        
         liste_dict_authors.append(dicta)

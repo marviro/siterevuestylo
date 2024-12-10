@@ -88,8 +88,9 @@ def articlepdf():
             if article['myid'] == '':
                 yield {'myid': article['id'] + '.pdf'}
             else:
-                print("yielding " + article['myid'])
-                yield {'myid': article['myid']}
+                if article['myid'].startswith("02"): # À modifier lorsqu'on génère un autre numéro!! @TODO
+                    print("yielding " + article['myid'])
+                    yield {'myid': article['myid']}
             # print(os.listdir('build/downloads'))
         except Exception as e:
             print(f"An error occurred with{article['id']}: {e}")

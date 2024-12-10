@@ -136,7 +136,7 @@ def article(myid):
             
     try:
         authors = yaml['authors']
-        print(authors)
+        # print(authors)
     except:
         authors = [{'forname':'','name':'','orcid':''}]
     

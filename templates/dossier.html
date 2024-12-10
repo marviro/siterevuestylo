@@ -42,7 +42,7 @@
 
 		<!-- Liste articles: -->
 		<table class="display-articles">
-            {% for a in horsdossier['articles'] | sort(attribute="keywords.0") %}
+            {% for a in horsdossier['articles'] | sort(attribute="keywords") %}
             <tr>
                 <!-- <td>{{a['myid'][0:2]}}</td> -->
 				<td></td>

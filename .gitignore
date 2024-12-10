@@ -12,6 +12,9 @@ downloads/
 archive_bsp/
 TODO.md
 static/lampadaire.bib
+static/media
+static/pages
 TODO
 .firebase/
 .vscode/
+build_archive/
