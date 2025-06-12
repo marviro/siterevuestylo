@@ -189,7 +189,7 @@ def keywords(): # la fonction qui sert les données pour la route /
     else:
         data = json.load(open('caches/keywords.json','r'))
 
-    data = sorted(data, key=lambda k: k['name']) 
+    data = sorted(data, key=lambda k: k['name'].lower()) 
     return render_template('motscles.html', current_page='articles', title="Mots-clés - Lampadaire", data=data)
 
 @app.route('/motscles/<name>.html')

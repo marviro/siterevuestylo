@@ -94,7 +94,9 @@ Les personnes intéressées peuvent soumettre leur texte en lien avec la thémat
 
 ### Section hors thème
 
-Cette section présente des articles divers qui n'ont pas nécessairement de lien avec la thématique du numéro. Si vous souhaitez y contribuer, contactez-nous à [hors-theme@lampadaire.ca](mailto:hors-theme@lampadaire.ca) et [direction@lampadaire.ca](mailto:direction@lampadaire.ca).
+Cette section présente des articles divers qui n'ont pas nécessairement de lien avec la thématique du numéro. Si vous souhaitez y contribuer, contactez-nous à [hors-theme@lampadaire.ca](mailto:hors-theme@lampadaire.ca) et [direction@lampadaire.ca](mailto:direction@lampadaire.ca). 
+
+- Longueur des articles : maximum 17 000 caractères espaces compris.
 
 On y retrouve entre autres les rubriques suivantes:
 

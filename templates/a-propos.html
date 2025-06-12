@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <script src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"></script>
 	<link href="../static/css/style.css" rel="stylesheet">
 	<link rel="preconnect" href="https://rsms.me/">
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -19,14 +20,31 @@
             <div style="flex: 1; vertical-align: top;">
                 <h1 class="huger">S'éclairer avec la philosophie</h1>
             </div>
-            <div class="content">
+            <div class="second-column">
                 <p class="content">Lampadaire, c’est la revue qui permet de s’éclairer avec la philosophie.<br><br>Lampadaire crée un lieu accessible et inclusif de dialogue philosophique dans la société québécoise et, plus généralement, dans la francophonie. Elle s’adresse à l’ensemble des individus intéressés par la recherche et l’enseignement en philosophie et par les enjeux philosophiques soulevés par la société contemporaine.<br><br>Dans cet esprit, Lampadaire publie des articles qui permettent d’accéder aux résultats de la recherche contemporaine en philosophie; de partager et d’enrichir les pratiques d’enseignement de la philosophie; de faire une place à des propositions philosophiques originales, qui prennent des formes inhabituelles et variées; et de soutenir et de reconnaître la communauté philosophique québécoise.</p><!-- <br>Lampadaire est une revue québécoise de philosophie grand public, qui s’est associée à la Société de philosophie du Québec. Lampadaire est une revue numérique et gratuite, qui respecte les standards de l’édition libre et qui publie exclusivement des articles en français. -->
             </div>
         </div>
 
         <div class="flex-container" style="align-items: flex-end; padding-bottom: 20px;">
-            <div style="flex: 1;"><img src="/static/media/lampadaire_allume.svg" style="height=100%; padding-bottom: 10px;"></div>
-            <div style="flex: 1; display: flex; flex-direction: column;">
+            <div style="flex: 1;">
+                <img src="/static/media/lampadaire_allume.svg" style="height=100%; padding-bottom: 10px;" id="toggleImage" onclick="toggleImage();"/>
+                <script>
+                    function toggleImage() {
+                        var img1 = "/static/media/lampadaire_allume.svg";
+                        var img2 = "/static/media/lampadaire_ferme.svg";
+
+                        var imgElement = document.getElementById('toggleImage');
+                        
+                        var original = imgElement.src;
+                        
+                        imgElement.src = (imgElement.src == img2) ? img1 : img2;
+                        if (imgElement.src === original) {
+                            imgElement.src = (imgElement.src == img1) ? img2 : img1;
+                        }
+                    }
+                </script>
+            </div>
+            <div class="second-column content" style="flex: 1; display: flex; flex-direction: column;">
                 <h1 style="font-weight: 650; font-size:30px;">Équipe</h1>
                 <ul class="spaced">
                     <li><a href="mailto:direction@lampadaire.ca">Marie Laplante-Anfossi</a></li>
@@ -52,6 +70,24 @@
                         de l'équipe de la revue, veuillez communiquer avec nous à l'adresse suivante:<br><a
                             href="mailto:info@lampadaire.ca">info@lampadaire.ca</a></p>
                 </div>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div style="flex: 1; vertical-align: top;">
+            </div>
+            <div class="second-column">
+                <p style="line-height: normal; font-size: 16px;">
+                    Mention légale <br><br>
+                    Éditeur : Revue philosophique Lampadaire
+                    <br>
+                    ISSN : 2819-0203 <br>
+                    Lieu de publication : Montréal <br>
+                    Type de support : Numérique <br>
+                    Fréquence : Deux numéros par année <br>
+                    Période de publication : 2024 - <br>
+                    Langue : Français <br>
+                    Politique d’accès : Creative Commons CC BY-NC-SA 4.0
+                </p>
             </div>
         </div>
     </div>

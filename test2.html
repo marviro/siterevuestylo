@@ -1,0 +1,76 @@
+<!doctype html><!-- This is a valid HTML5 document. -->\n<!-- Screen readers, SEO, extensions and so on. -->\n<html
+    lang="fr">\n
+    <head>\n
+        <!-- Has to be within the first 1024 bytes, hence before the `title` element\n    See: https://www.w3.org/TR/2012/CR-html5-20121217/document-metadata.html#charset -->\n
+        <meta charset="utf-8">\n <!-- Why no `X-UA-Compatible` meta: https://stackoverflow.com/a/6771584 -->\n
+        <!-- The viewport meta is quite crowded and we are responsible for that.\n    See: https://codepen.io/tigt/post/meta-viewport-for-2015 -->\n
+        <meta name="viewport" content="width=device-width,initial-scale=1">\n
+        <!-- Required to make a valid HTML5 document. -->\n <title>Stylo export</title>\n
+        <link rel="stylesheet" href="/static/vendors/css/nord.0.2.0.css">\n
+        <link rel="stylesheet" href="/static/vendors/css/simple.2.0.2.css">\n
+        <link rel="stylesheet" href="/static/css/colors.css">\n
+        <link rel="stylesheet" href="/static/css/fonts.css">\n
+        <link rel="stylesheet" href="/static/css/base.css">\n
+        <link rel="stylesheet" href="/static/css/forms.css">\n
+        <link rel="stylesheet" href="/static/css/errors.css">\n
+        <link rel="shortcut icon" href="/static/favicon.ico">\n \n<style type="text/css">
+            \n fieldset {
+                \n border: 1px solid var(--border);
+                \n border-radius: 5px;
+                \n margin: 0.5rem 0;
+                \n
+            }
+
+            \n select {
+                \n width: 100%;
+                \n
+            }
+
+            \n output[data-target="preview"] {
+                \n display: block;
+                \n background-color: var(--bg);
+                \n border-radius: 5px;
+                \n padding: 1rem;
+                \n
+            }
+
+            \n
+        </style>\n\n
+    </head>\n
+
+<body>\n <header>\n \n <h1><a href="/" title="Retourner \xc3\xa0 l\xe2\x80\x99accueil">Stylo export</a></h1>\n \n
+    </header>\n <main>\n \n \n <h2>Tisser les mots, Tisser les mondes: le r\xc3\xb4le du tissage dans la
+            r\xc3\xa9conciliation de l&#39;humain avec son environnement</h2>\n \n <blockquote>\n <p>Cette \xc3\xa9tude
+                interroge la question environnementale en examinant l\xe2\x80\x99Homme dans son territoire, son habitat
+                et sa cohabitation avec celui-ci. Notre raisonnement s&#39;ancre dans la relation humaine \xc3\xa0 la
+                cueillette, premi\xc3\xa8re interaction avec la nature et r\xc3\xa9cit inexploit\xc3\xa9. Cette analyse
+                souligne la technique du tissage, premier outil\nartisanal : entrelacement de fils pour cr\xc3\xa9er un
+                tissu, et symbole de notre relation avec l&#39;environnement en d\xc3\xa9limitant un espace clos qui
+                unit le corps et le dehors. L\xe2\x80\x99objectif est de repenser notre place dans
+                l\xe2\x80\x99environnement, en privil\xc3\xa9giant le r\xc3\xa9cit du cueilleur au h\xc3\xa9ros
+                chasseur, ouvrant ainsi d\xe2\x80\x99autres perspectives via la fiction, le travail
+                d\xe2\x80\x99artistes et de philosophes.</p>\n </blockquote>\n \n \n <h3>Exports</h3>\n <form
+            method="GET" \n action="/lampadaire/article/export/stylo.huma-num.fr/683f1002d7c3ac0028321926/03-tisser/" \n
+            \n>\n <input id="with_toc" name="with_toc" type="hidden" value="0">\n <input id="with_ascii"
+                name="with_ascii" type="hidden" value="0">\n <input id="with_link_citations" name="with_link_citations"
+                type="hidden" value="y">\n <input id="with_nocite" name="with_nocite" type="hidden" value="y">\n
+            <fieldset>\n \n <label for="version">Version de votre article</label>\xc2\xa0:<br />\n <select id="version"
+                    name="version">
+                    <option selected value="">Version la plus r\xc3\xa9cente</option>
+                </select>\n </fieldset>\n \n\n \n <fieldset>\n \n <label for="formats">Format de votre
+                    export</label>\xc2\xa0:<br />\n <select id="formats" name="formats">
+                    <option value="all">all</option>
+                    <option selected value="pdf">pdf</option>
+                    <option value="tex">tex</option>
+                </select>\n </fieldset>\n \n <input type="submit" value="T\xc3\xa9l\xc3\xa9charger">\n </form>\n
+        <template>\n
+            <pre>\n                @incollection{deleuze_lisse_1980,\n  title = {Le Lisse et Le Stri{\\&#39;e}},\n  booktitle = {Mille Plateaux},\n  author = {Deleuze, Gilles and Guattari, F{\\&#39;e}lix},\n  year = {1980},\n  pages = {592--625},\n  publisher = {{\\&#39;E}ditions de Minuit},\n  address = {Paris},\n  isbn = {978-2-7073-0307-3},\n  lccn = {RC455 B2430 .D42 1972, t. 2},\n  keywords = {Philosophy}\n}\n\n@book{griffin_woman_1978,\n  title = {Woman and {{Nature}}: {{The Roaring Inside Her}}},\n  shorttitle = {Woman and {{Nature}}},\n  author = {Griffin, Susan},\n  year = {1978},\n  publisher = {Harper \\&amp; Row},\n  abstract = {&#34;Women and nature is about memory and mutilation, female anger as power, female presence as transforming force. It embraces ritual and science, history and imagination, calling up the voices and body of our earth and restoring us to knowledge of her beauty and our own. In one of the infinite false polarities of patriarchy, both the exploiter-rapists and the sexist ecology movement have lumped women and nature together in a view negative for us both ... Griffin has collected here the most apparently disparate materials (lumbering manuals, gynecology texts, the pronouncements of early theologians, annals of American exploration, office manuals, poetry, the dreams of the scientists, etc.) into an extraordinary collage which, for all the research and hard intellectual work underlying it, becomes an intense physical experience&#34;--Back cover.},\n  googlebooks = {UtEqQCOehNEC},\n  isbn = {978-0-06-090744-0},\n  langid = {english},\n  keywords = {Cooking / Beverages / Alcoholic / General,History / Women,Religion / Spirituality,Social Science / General,Social Science / Women&#39;s Studies}\n}\n\n@misc{johnson_quelle_2024,\n  title = {{Quelle est la signification culturelle du tissage pour les Premi{\\`e}res Nations ?}},\n  urldate = {2025-06-12},\n  abstract = {Le tissage est un exemple complexe et sophistiqu{\\&#39;e} parmi toutes les techniques des Premi{\\`e}res Nations et leur culture. Outre la cr{\\&#39;e}ation d&#39;objets de grande beaut{\\&#39;e}, l&#39;activit{\\&#39;e} a, elle-m{\\^e}me, une profonde signification culturelle. Le tissage est une fa{\\c c}on de partager des connaissances, de connecter les{\\dots}},\n  collaborator = {Johnson, Cherie},\n  langid = {french},\n  annotation = {year: 2024},\n  file = {/home/vicbab/Zotero/storage/G9G8V9JK/59dqp8kif.html}\n}\n\n\n@misc{kraume_bauhaus_2019,\n  title = {{Bauhaus -- Un temps nouveau}},\n  author = {Kraume, Lars},\n  year = {2019},\n  publisher = {Arte},\n  urldate = {2025-06-12},\n  abstract = {Bauhaus {$\\bullet$} Un temps nouveau 1~ -~ L&#39;apr{\\`e}s guerre 2~ -~ Le prince~de Theb{\\`e}s 3~ -~~Les morts de mars 4~ -~~L atelier des femmes 5~ -~ Le tribunal 6~ -~ Quitter Weimar ZDF arte {$\\bullet$} 2019},\n  langid = {fre},\n  keywords = {Alma Mahler-Werfel,Bauhaus,Design,Dessau,Dorte Helm,Elsa Lasker-Schuler,Johannes Itten,L atelier des femmes,L&#39;apres guerre,Le prince de Thebes,Les morts de mars,Quitter Weimar,Walter Gropius,Weimar,Weimarer Republik}\n}\n\n@book{le_guin_danser_2020,\n  title = {{Danser au bord du monde: mots, femmes, territoires}},\n  shorttitle = {{Danser au bord du monde}},\n  author = {Le Guin, Ursula K.},\n  translator = {Collon, H{\\&#39;e}l{\\`e}ne},\n  year = {2020},\n  series = {{Premier secours}},\n  publisher = {{\\&#39;E}ditions de l&#39;{\\&#39;E}clat},\n  address = {Paris},\n  isbn = {978-2-84162-451-5},\n  langid = {fre},\n  lccn = {818.54 (oeuvre)}\n}\n\n@article{le_guin_theorie_2018,\n  title = {{La th{\\&#39;e}orie de la Fiction-Panier}},\n  author = {Le Guin, Ursula K.},\n  translator = {Cohen, Aur{\\&#39;e}lien Gabriel},\n  year = {2018},\n  month = oct,\n  journal = {Terrestres},\n  urldate = {2025-06-12},\n  abstract = {Ursula K. Le Guin {$\\cdot$} Contre l&#39;Histoire patriarcale, la fiction-panier : un texte f{\\&#39;e}ministe sur la possibilit{\\&#39;e} d&#39;autres r{\\&#39;e}cits.},\n  langid = {french},\n  file = {/home/vicbab/Zotero/storage/ERIPALBS/la-theorie-de-la-fiction-panier.html}\n}\n\n@misc{le_guin_ursula_2014,\n  title = {Ursula {{K}}. {{Le Guin}} --- {{National Book Foundation Medal}}: {{Ursula}}&#39;s {{Acceptance Speech}}},\n  shorttitle = {Ursula {{K}}. {{Le Guin}} --- {{National Book Foundation Medal}}},\n  year = {2014 19 november},\n  urldate = {2025-06-12},\n  collaborator = {Le Guin, Ursula K.},\n  langid = {american},\n  file = {/home/vicbab/Zotero/storage/B2CQN8BX/nbf-medal.html}\n}\n\n@misc{messouma_manlanbien_entretien_2023,\n  title = {{Entretien avec Marie-Claire Messouma Manlanbien - Palais de Tokyo}},\n  author = {Messouma Manlanbien, Marie-Claire},\n  year = {2023},\n  month = apr,\n  urldate = {2025-06-12},\n  abstract = {Conversation entre Marie-Claire Messouma Manlanbien, artiste de l&#39;exposition L&#39;{\\^e}tre, l&#39;autre et l&#39;entre, et Daria de Beauvais, commissaire.},\n  collaborator = {{de Beauvais}, Daria},\n  langid = {french},\n  file = {/home/vicbab/Zotero/storage/Z3A2BEHP/entretien-avec-marie-claire-messouma-manlanbien.html}\n}\n\n@book{woolf_trois_2012,\n  title = {{Trois guin{\\&#39;e}es}},\n  author = {Woolf, Virginia},\n  translator = {Gauthier, L{\\&#39;e}a},\n  year = {2012},\n  publisher = {Blackjack},\n  address = {Montreuil},\n  isbn = {978-2-918063-23-0},\n  langid = {fre}\n}\n\n            </pre>
+            \n
+        </template>\n \n\n </main>\n \n
+    <script type="application/vnd.citationstyles.style+xml" \n data-target="excerpt"></script>\n\n
+    <script
+        type="text/javascript">\n    function onload() { \n        const previewTarget = document.querySelector(\'[data-target="preview"]\')\n        const excerptTarget = document.querySelector(\'[data-target="excerpt"]\')\n        const select = document.querySelector(\'[data-action="preview#update"]\')\n\n        select.addEventListener(\'change\', update)\n\n        function checkStatus(response) {\n            if (response.status >= 200 && response.status < 300) {\n                return response\n            } else {\n                const error = new Error(response.statusText)\n                error.response = response\n                previewTarget.innerHTML = `\n                    <p>La g\xc3\xa9n\xc3\xa9ration de la pr\xc3\xa9visualisation a \xc3\xa9chou\xc3\xa9\xe2\x80\xa6</p>\n                `\n                throw error\n            }\n        }\n\n        function update(event) {\n            previewTarget.innerHTML = `\n                <p>G\xc3\xa9n\xc3\xa9ration de la pr\xc3\xa9visualisation en cours\xe2\x80\xa6</p>\n            `\n            const data = new FormData()\n            data.append(\'excerpt\', excerptTarget.textContent)\n            data.append(\'bibliography_preview\', select.value)\n            fetch(\'/api/bibliography_preview\', {\n                method: \'POST\',\n                body: data\n            })\n            .then(checkStatus)\n            .then((response) => response.text())\n            .then((content) => {\n                previewTarget.innerHTML = content\n            })\n        }\n\n        // Otherwise, when refreshing the page, the selection becomes\n        // out of sync because the browser keep the select to the latest\n        // choice (at least Firefox).\n        update()\n\n        // Clean up\n        document.removeEventListener(\'DOMContentLoaded\', onload)\n    }\n\n    if (document.readyState != \'loading\') {\n        onload()\n    } else {\n        document.addEventListener(\'DOMContentLoaded\', onload)\n    }\n</script>
+    \n\n
+</body>\n
+
+</html>

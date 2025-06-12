@@ -53,8 +53,12 @@ def idfrommyid(myid):
           for i in la:
             if i['id'] == myid:
                 data = {'data':{'article':i}}
-    yaml = yamltojs(data['data']['article']['workingVersion']['yaml'])[0]
-    
+    try:
+        yaml = data['data']['article']['workingVersion']['yaml']
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        yaml = ""
+        pass
     try:
         latestversion= data['data']['article']['versions'][0]['_id']
     except:
@@ -73,10 +77,11 @@ def getartinfofromyaml(article,key):
     return value
 
 # fonction pour récuperer le pdf via l'export stylo. Si on crée un export pour femur, on pourra avoir un template particulier et récuperer aussi l'xml
+# local: http://127.0.0.1:5000/lampadaire/export/stylo.huma-num.fr/
 def getpdf(article, myid, version):
     try:
         print("getting "+ myid)
-        url ="http://127.0.0.1:5000/lampadaire/export/stylo.huma-num.fr/"+article+"/"+myid+"/"
+        url ="https://export.stylo.huma-num.fr/lampadaire/article/export/stylo.huma-num.fr/"+article+"/"+myid+"/"
         params = {
                     "with_toc": 0,
                     "with_ascii": 0,
@@ -84,7 +89,10 @@ def getpdf(article, myid, version):
                     "bibliography_style": "chicagomodified",
                     "formats": "pdf",
                     }
+        print(url,params)
         r = requests.get(url,params)
+        print(r.content)
+        print(io.BytesIO(r.content))
         z = zipfile.ZipFile(io.BytesIO(r.content))
         z.extractall("downloads")
         for file in z.filelist:
