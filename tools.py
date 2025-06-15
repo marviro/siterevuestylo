@@ -53,12 +53,7 @@ def idfrommyid(myid):
           for i in la:
             if i['id'] == myid:
                 data = {'data':{'article':i}}
-    try:
-        yaml = data['data']['article']['workingVersion']['yaml']
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        yaml = ""
-        pass
+    yaml = yamltojs(data['data']['article']['workingVersion']['yaml'])[0]
     try:
         latestversion= data['data']['article']['versions'][0]['_id']
     except:
