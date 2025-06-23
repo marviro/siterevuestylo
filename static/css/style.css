@@ -30,14 +30,14 @@ button.donate {
 }
 
 button:hover.donate{
-  background-color: #04AA6D;
+  background-color: #00A44F;
   border: 2px solid #000;
   color:#000;
   cursor: pointer;
 }
 
 button.donateA {
-  background-color: #04AA6D;
+  background-color: #00A44F;
   color: #000;
   letter-spacing: -0.013em;
   font-size: 20px;
