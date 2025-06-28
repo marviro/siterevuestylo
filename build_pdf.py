@@ -88,7 +88,7 @@ def articlepdf():
             if article['myid'] == '':
                 yield {'myid': article['id'] + '.pdf'}
             else:
-                if article['myid'].startswith("03"): # À modifier lorsqu'on génère un autre numéro!! @TODO
+                if article['myid'].startswith("03-praxis"): # À modifier lorsqu'on génère un autre numéro!! @TODO
                     print("yielding " + article['myid'])
                     yield {'myid': article['myid']}
             # print(os.listdir('build/downloads'))

@@ -1,6 +1,7 @@
 <html>
 
 <head>
+	<link rel="stylesheet" href="../static/css/cookieconsent.css">
 	<script src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"></script>
 	<link href="../static/css/style.css" rel="stylesheet">
 	<link rel="preconnect" href="https://rsms.me/">
@@ -111,9 +112,11 @@
 </head>
 
 <body>
+	
 	<div class="corps">
 		{% include "header.html" %}
 	<div class="article">
+		{{yaml}}
 		<!-- <h1>{{title|safe}} {{myid}}</h1> -->
 		<h4>{% if yaml['dossier'] %}{% for d in yaml['dossier'] %}No. {{d['id'][0:2]}}{% endfor %}{% endif %}{% if mydossier%} — {{mydossier}}{%endif%}</h4>
 		<h1 class="huge" style="text-align: left;">{{title|safe}}</h1>
@@ -126,8 +129,22 @@
 			a['affiliations']
 			%}, {{a['affiliations']}}{%endif%}
 			{%if a|length > 3%} <br> {%endif%}
-
 		</a>{%endfor%}
+		{%if yaml['translator'] != [{'forname': '', 'surname': ''}]%}
+		{%for t in yaml['translator']%}<b>Traduit par </b><b>{{t.forname}} {{t.surname}}</b>{%if t['orcid']%}
+			<a href="https://orcid.org/{{t['orcid']}}">
+				<img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16"
+					height="16" />
+			</a>
+			{%endif%}{%if
+			t['affiliations']
+			%}, {{t['affiliations']}}{%endif%}
+			{%if t|length > 3%} <br> {%endif%}
+		</a>{%endfor%}
+		{%endif%}
+		{%if yaml['translationOf'] != [None]%}
+		{%for t in yaml['translationOf']%}
+		<p><span><b>Titre original: </b>«&nbsp;{{t.title}}&nbsp;»</span></p>{%endfor%}{%endif%}
 		{%if yaml['date']%}
 		<p> <span><b>Date de publication:</b> {{yaml['date']}}</span></p>
 		{%endif%}
@@ -135,7 +152,7 @@
 		<p><b>Licence:</b> {{yaml['rights']}}</p>
 		{%endif%} -->
 		
-		{% if abstract_fr%}
+		{% if abstract_fr|length > 1%}
 		<p style="text-align: center;margin-bottom: 0px;"><b>Résumé</b></p>
 		<p style="padding-left: 15%;padding-right: 15%;">{{abstract_fr|safe}}</p>
 		{%endif%}
