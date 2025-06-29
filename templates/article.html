@@ -116,7 +116,7 @@
 	<div class="corps">
 		{% include "header.html" %}
 	<div class="article">
-		{{yaml}}
+		<!-- {{yaml}} -->
 		<!-- <h1>{{title|safe}} {{myid}}</h1> -->
 		<h4>{% if yaml['dossier'] %}{% for d in yaml['dossier'] %}No. {{d['id'][0:2]}}{% endfor %}{% endif %}{% if mydossier%} — {{mydossier}}{%endif%}</h4>
 		<h1 class="huge" style="text-align: left;">{{title|safe}}</h1>
@@ -151,10 +151,12 @@
 		<!-- {%if yaml['rights']%}
 		<p><b>Licence:</b> {{yaml['rights']}}</p>
 		{%endif%} -->
-		
+
+		{% if abstract_fr%}
 		{% if abstract_fr|length > 1%}
 		<p style="text-align: center;margin-bottom: 0px;"><b>Résumé</b></p>
 		<p style="padding-left: 15%;padding-right: 15%;">{{abstract_fr|safe}}</p>
+		{%endif%}
 		{%endif%}
 		{% if abstract_en%}
 		<p><b style="text-align: center;margin-bottom: 0px;">Abstract</b></p>

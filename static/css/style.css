@@ -16,6 +16,27 @@ body {
   /* text-shadow: -1px -1px #e0e0e0; */
 }
 
+button.cookiesPref {
+  background-color: transparent;
+  color: #000;
+  letter-spacing: -0.019em;
+  line-height: calc(1em*1.2);
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 0;
+  padding-bottom: 0;
+  /* line-height: inherit; */
+  border-radius: 4px;
+  border: 2px solid #000;
+}
+
+button:hover.cookiesPref{
+  background-color: #FFEDD1;
+  border: 2px solid #000;
+  color:#000;
+  cursor: pointer;
+}
+
 button.donate {
   background-color: transparent;
   color: #000;
@@ -59,7 +80,8 @@ sup {
   vertical-align: top; 
   font:.833em; 
   padding-left:.3em;
-  position: relative; height="50vw"
+  position: relative; 
+  height:"50vw";
 }
 
 .bodyA {
@@ -332,8 +354,6 @@ p.accueil {
   line-height: 150%;
 }
 
-.logo {}
-
 .menu {
   display: flex;
   justify-content: space-between;
@@ -481,7 +501,7 @@ ul.menuA {
 }
 
 .logoPartenaire {
-  height: 5vh;
+  height: 4vh;
   padding: 10px;
 }
 /* .menuA>li:hover {

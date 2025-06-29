@@ -93,7 +93,7 @@ CookieConsent.run({
             // See: https://cookieconsent.orestbida.com/reference/configuration-reference.html#category-services
             services: {
                 [SERVICE_ANALYTICS_STORAGE]: {
-                    label: 'Enables storage (such as cookies) related to analytics e.g. visit duration.',
+                    label: 'Permet le stockage de cookies liés aux statistiques d\'utilisation, p. ex.: la durée de la visite.',
                 }
             }
         },
@@ -133,9 +133,9 @@ CookieConsent.run({
         translations: {
             fr: {
                 consentModal: {
-                    title: "Lampadaire utilise des cookies analytiques",
+                    title: "Lampadaire utilise des cookies",
                     description: "",
-                    closeIconLabel: "X",
+                    closeIconLabel: "",
                     acceptAllBtn: "Tout accepter",
                     acceptNecessaryBtn: "Tout rejeter",
                     showPreferencesBtn: "Gérer les préférences",

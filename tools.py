@@ -358,11 +358,11 @@ def retrieveauthors():
             for author in authors:
                 title= article['title']
                 articles_list={'myid':myid,'id':article_id, 'title':title}
-                if 'surname' not in author or author['surname'] == "":
+                if 'surname' not in author or author['surname'] == "" or author['surname'] is None:
                     author.update({'surname':""})
                     authorslug = slugify(author['forname'])
                     # print(authorslug)
-                if 'forname' not in author or author['forname'] == "":
+                if 'forname' not in author or author['forname'] == "" or author['forname'] is None:
                     author.update({'forname':""})
                     authorslug = slugify(author['surname'])
                     # print(authorslug)
@@ -371,6 +371,7 @@ def retrieveauthors():
                     authorfslug = slugify(author['forname'])
                     authorslug= authornslug+'-'+authorfslug
                     # print(authorslug)
+                print(f"author = {author} has authorslug = {authorslug}")
                 dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
                 authors_list.append(dictauthor)
         except:
@@ -391,15 +392,17 @@ def makeauthors(article):
             if 'surname' not in author or author['surname'] == "":
                 author.update({'surname':""})
                 authorslug = slugify(author['forname'])
-                # print(authorslug)
+                # print(f"authorslug = {authorslug}, surname = {author['surname']}")
             if 'forname' not in author or author['forname'] == "":
                 author.update({'forname':""})
                 authorslug = slugify(author['surname'])
+                # print(f"authorslug = {authorslug}, forname = {author['forname']}")
                 # print(authorslug)
             if author['forname'] and author['surname'] != "":
                 authornslug = slugify(author['surname'])
                 authorfslug = slugify(author['forname'])
                 authorslug= authornslug+'-'+authorfslug
+                # print(f"authorslug = {authorslug}, forname = {author['forname']}, surname = {author['surname']}")
                 # print(authorslug)
             dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
             authors_list.append(dictauthor)
@@ -513,6 +516,8 @@ def setauthors():
 
         dicta={'author':a}
         for i in authorssorted:
+            # if i['author']['forname'] == "":
+            #     print(i['authorslug'])
             if i['author']['forname'] == a['forname'] and i['author']['surname'] == a['surname']:
                 # try:
                 #     if a['author']['forname'] is None or a['author']['forname'] == "":
@@ -534,6 +539,7 @@ def setauthors():
         liste_sd = sorted(liste_sd, key=lambda k: k['myid']) 
         dicta.update({'articles':liste_sd})        
         liste_dict_authors.append(dicta)
+        # print(liste_dict_authors)
     return liste_dict_authors    
 
 def renameFiles(name, type, path):

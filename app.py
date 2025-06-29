@@ -36,6 +36,14 @@ def contribuer(): # la fonction qui sert les données pour la route /
 
     return render_template('contribuer.html', current_page='contribuer', title="Contribuer - Lampadaire", contenu=contenu)
 
+@app.route('/mention-legale.html') # route où seront servies ces données
+def mentionlegale(): # la fonction qui sert les données pour la route /
+    page = "static/pages/mention-legale.md"
+    contenu = pypandoc.convert_file(page, 'html', format='md')
+
+    return render_template('mention-legale.html', current_page='a-propos', title="Mention légale - Lampadaire", contenu=contenu)
+
+
 @app.route('/a-propos.html') # route où seront servies ces données
 def aboutpage(): # la fonction qui sert les données pour la route /
     page = "static/pages/a-propos.md"
@@ -226,12 +234,22 @@ def author(name):
     for a in data:
         if a['authorslug'] == name:
             myauthor = a
+            print(f"Author = {name} has authorslug = {a['authorslug']}")
+            # print(f"Author = {name} has forname = {a['forname']}")
             break
+    if myauthor['author']['forname'] is None:
+        myauthor['author']['forname'] = ""
+    if myauthor['author']['surname'] is None:
+        myauthor['author']['surname'] = ""
     if myauthor['author']['forname'] != "":
         title += myauthor['author']['forname']
         title += " "
     if myauthor['author']['surname'] != "":
         title += myauthor['author']['surname']
+    if myauthor['author']['forname'] == "" and myauthor['author']['surname'] != "":
+        title += myauthor['author']['surname']
+    if myauthor['author']['forname'] != "" and myauthor['author']['surname'] == "":
+        title += myauthor['author']['forname']
     return render_template('author.html', current_page='articles', title= title + " - Lampadaire", author=myauthor)
 
 @app.route('/dossiers/index.html') # route où seront servies ces données

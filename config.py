@@ -12,4 +12,4 @@ tagName = 'ARTICLE_PUB'
 
 appelTag = 'APPEL'
 
-dynamic = True # si False, on utilise les fonctions de retrivearticles
+dynamic = True # si False, on utilise les fonctions de retrievearticles
