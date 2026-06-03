@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/css/cookieconsent.css">
+    <script src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"></script>
+	<link href="../static/css/style.css" rel="stylesheet">
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+	<title>{{title|striptags}}</title>
+	<link rel="icon" type="image/png" href="../static/media/favicon.png">
+    <meta property="og:image" content="https://lampadaire.ca/static/media/lockup_lampadaire.jpg">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    
+	<div class="corps">
+	{% include "header.html" %}
+
+	<h1>Rubriques thématiques</h1>
+	<table class="display">
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/argumentee.html">Argumentée</a></td>
+            <td >Courts articles visant à défendre une position philosophique en lien avec le dossier thématique.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/collegiale.html">Collégiale</a></td>
+            <td >Articles visant à introduire les lecteurs à une notion ou une idée philosophique soulevée par la thématique du dossier. L’objectif de cette rubrique est de fournir aux professeur-es du collégial du matériel adapté à leur pratique et accessible à leurs étudiant-es.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/creative.html">Créative</a></td>
+            <td >Espace accessible et ouvert aux réflexions philosophiques de toutes formes soulevées par la thématique du dossier.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/erudite.html">Érudite</a></td>
+            <td >Articles de vulgarisation des recherches actuelles en philosophie ayant une affinité avec la thématique du dossier.</td>
+        </tr>
+    </table>
+    <h1>Rubriques hors-thème</h1>
+    <table class="display">
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/vitrine.html">Vitrine sur la recherche</a></td>
+            <td >Rubrique composée de trois sous-sections : événement, vulgarisation, et recherche au collégial. Elle vise à mettre en valeur la recherche savante en philosophie, du cégep à l’université.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/methodes-pedagogiques.html">Méthodes pédagogiques</a></td>
+            <td >Espace de partage et d’échanges au sujet des méthodes pédagogiques utilisées, tant au cégep qu’à l’université, pour enseigner la philosophie. Le but de cette rubrique est de mettre en lumière des pratiques innovantes et les expériences prometteuses et infructueuses qui les caractérisent afin de créer un partage d’expertise.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/portrait.html">Portrait</a></td>
+            <td >Articles visant à présenter différents parcours professionnels réalisables à l’aide d’une formation en philosophie.</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td><a href="/rubriques/traduction.html">Traduction</a></td>
+            <td >Rendre des textes philosophiques écrits dans une autre langue accessibles au public francophone.</td>
+        </tr>
+    </table>
+
+	<!-- {% for d in data | reverse %}
+    <table class="display">
+        <tr style="font-size: large;">
+			<td >No. {{d['dossier']['id'][0:2]}}</td>
+            <td style="width: 30%;"><a href="/dossiers/{{d['dossier']['id']}}.html">{{d['dossier']['title_f']}}</a></td>
+            <td>
+                {% for a in d['articles'] %}
+                    {%if a['myid'] != ''%}
+                        <a href="../articles/{{a['myid']}}.html">{{a['display'] | striptags}}</a><br style="margin-bottom: 0.75em;">
+                    {%endif%}
+                {%endfor%}
+            </td>
+        </tr>
+    </table>
+{% endfor %} -->
+	
+</div>
+	{% include "footer.html" %}
+</body>
+
+</html>

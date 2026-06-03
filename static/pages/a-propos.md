@@ -2,8 +2,9 @@ Lampadaire est la revue grand public de la Société de philosophie du Québec (
 
 ## Équipe
 - [Marie Laplante-Anfossi](mailto:direction@lampadaire.ca), directrice et responsable du financement
-- [Étienne Groleau](mailto:dossiers@lampadaire.ca), responsable des dossiers thématiques
-- [Justine Perron](mailto:hors-theme@lampadaire.ca), responsable de la section hors-thème
+- [Edgar Lopez-Asselin](mailto:dossiers@lampadaire.ca), responsable des dossiers thématiques
+- [Christian Djoko Kamgain](mailto:hors-theme@lampadaire.ca), responsable de la section hors-thème
 - [Raphaël Marquis-Pelletier](mailto:secretaire@lampadaire.ca), secrétaire
 - [William Fréchette](mailto:finances@lampadaire.ca), responsable des finances
 - [Victor Babin](mailto:web@lampadaire.ca), responsable web
+- [Laurence Dufour-Villeneuve](mailto:info@lampadaire.ca), responsable des communications

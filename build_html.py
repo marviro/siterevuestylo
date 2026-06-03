@@ -69,6 +69,23 @@ def author():
     for d in data :
         yield {'name': d['authorslug']}
 
+@freezer.register_generator
+def rubrique():
+    print("generating rubriques")
+    if config.dynamic:
+        print("dynamic: setting keywords")
+        data = tools.setkeywords()
+    else:
+        print("static: loading keywords")
+        data = json.load(open('caches/keywords.json','r'))
+
+    rubriques_dict = {"vitrine", "collegiale", "erudite", "argumentee", "traduction", "portrait", "creative", "methodes-pedagogiques"}
+
+    for d in data :
+        if d['nameslug'] in rubriques_dict:
+            print(f"generating {d['nameslug']}")
+            yield {'name': d['nameslug']}
+
 # @freezer.register_generator
 # def articlepdf():
 #     print("generating pdfs")

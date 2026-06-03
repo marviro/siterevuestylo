@@ -43,6 +43,9 @@ def mentionlegale(): # la fonction qui sert les données pour la route /
 
     return render_template('mention-legale.html', current_page='a-propos', title="Mention légale - Lampadaire", contenu=contenu)
 
+@app.route('/404.html') # route où seront servies ces données
+def quatrecentquatre(): # la fonction qui sert les données pour la route /
+    return render_template('404.html', current_page='home', title="Erreur 404 - Lampadaire")
 
 @app.route('/a-propos.html') # route où seront servies ces données
 def aboutpage(): # la fonction qui sert les données pour la route /
@@ -85,20 +88,24 @@ def article(myid):
         kw_sl=[]
     try:
         authors= yaml['authors']
+        # print(yaml['authors'])
         au_sl=[]
         for au in authors:
             try:
                 if 'surname' not in au:
+                    # print(f"surname not in au = {au}")
                     au.update({'surname':""})
                     authorslug = slugify(au['forname'])
                     au.update({'authorslug':authorslug})
                     au_sl.append(au)
                     continue
                 if 'forname' not in au:
+                    # print(f"forname not in au = {au}")
                     au.update({'forname':""})
                     authorslug = slugify(au['surname'])
                     au.update({'authorslug':authorslug})
                     au_sl.append(au)
+                    # print(au)
                     continue
 
                 authorslug = slugify(au['surname'])+'-'+slugify(au['forname'])
@@ -168,7 +175,7 @@ def articlepdf(myid):
     myid=alldata[1]
     id = alldata[3]
     version=alldata[4]
-    print(myid,id,version)
+    # print(myid,id,version)
     tools.getpdf(id,myid,version)
     #For windows you need to use drive name [ex: F:/Example.pdf]
     path = os.path.join('downloads', f'{myid}.pdf')
@@ -198,6 +205,7 @@ def keywords(): # la fonction qui sert les données pour la route /
         data = json.load(open('caches/keywords.json','r'))
 
     data = sorted(data, key=lambda k: k['name'].lower()) 
+    # print(f"data: {data}")
     return render_template('motscles.html', current_page='articles', title="Mots-clés - Lampadaire", data=data)
 
 @app.route('/motscles/<name>.html')
@@ -224,7 +232,6 @@ def authors(): # la fonction qui sert les données pour la route /
 
 @app.route('/auteurices/<name>.html')
 def author(name):
-
     if config.dynamic:
         data = tools.setauthors()
     else:
@@ -234,7 +241,7 @@ def author(name):
     for a in data:
         if a['authorslug'] == name:
             myauthor = a
-            print(f"Author = {name} has authorslug = {a['authorslug']}")
+            # print(f"Author = {name} has authorslug = {a['authorslug']}")
             # print(f"Author = {name} has forname = {a['forname']}")
             break
     if myauthor['author']['forname'] is None:
@@ -250,6 +257,7 @@ def author(name):
         title += myauthor['author']['surname']
     if myauthor['author']['forname'] != "" and myauthor['author']['surname'] == "":
         title += myauthor['author']['forname']
+    # print(title)
     return render_template('author.html', current_page='articles', title= title + " - Lampadaire", author=myauthor)
 
 @app.route('/dossiers/index.html') # route où seront servies ces données
@@ -281,6 +289,44 @@ def dossier(idd):
     
     title = mydossier['dossier']['title_f']
     return render_template('dossier.html', current_page='articles', title = title + " - Lampadaire", mydossier=mydossier, horsdossier=horsdossier)
+
+@app.route('/rubriques/index.html') # route où seront servies ces données
+def rubriques(): # la fonction qui sert les données pour la route /
+    # if config.dynamic:
+    #     data = tools.setdossiers()
+    #     appels = tools.retrievetags("appel")
+    # else:
+    #     data = json.load(open('caches/dossiers.json','r'))
+    return render_template('rubriques.html', current_page='articles', title="Rubriques - Lampadaire")
+
+@app.route('/rubriques/<name>.html')
+def rubrique(name):
+    if config.dynamic:
+        articles = tools.retrievetags("article")
+        appels = tools.retrievetags("appel")
+        dossiers = tools.setdossiers()
+        authors = tools.setauthors()
+        data = tools.setkeywords()
+    else:
+        data = json.load(open('caches/keywords.json','r'))
+    mykeyword={}
+
+    if name == "vitrine":
+        vitrine = {"concours-philosopher", "philosopher", "vulgarisation", "recherche-au-collegial", "vitrine"}
+        # print("include 'vitrine', 'vulgarisation', 'événement', et 'rechercher au collégial'")
+        mykeyword = {'name': 'vitrine', 'nameslug':'vitrine', 'articles':''}
+        articles = []
+        for k in data:
+            if k['nameslug'] in vitrine:
+                articles += k['articles']
+        mykeyword.update({'articles': articles})
+    else:
+        for k in data:
+            if k['nameslug'] == name:
+                mykeyword = k
+    # print(mykeyword)
+    # data = sorted(data, key=lambda k: k['date']) 
+    return render_template('rubrique.html', current_page='articles', title= name + " - Lampadaire", articles=articles, mykeyword=mykeyword)
 
 @app.route('/articles.html') # route où seront servies ces données
 def articles(): # la fonction qui sert les données pour la route /

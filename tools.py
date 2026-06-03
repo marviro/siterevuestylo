@@ -80,15 +80,17 @@ def getpdf(article, myid, version):
         url ="http://127.0.0.1:5000/lampadaire/export/stylo.huma-num.fr/"+article+"/"+myid+"/"
         params = {
                     "with_toc": 0,
-                    "with_ascii": 0,
+                    "with_ascii": 0,                    
+                    "with_link_citations": 1,
+                    "with_nocite": 0,
                     "version": version,
-                    "bibliography_style": "chicagomodified",
+                    "bibliography_style": "chicago-author-date-fr",
                     "formats": "pdf",
                     }
         print(url,params)
         r = requests.get(url,params)
-        print(r.content)
-        print(io.BytesIO(r.content))
+        # print(r.content)
+        # print(io.BytesIO(r.content))
         z = zipfile.ZipFile(io.BytesIO(r.content))
         z.extractall("downloads")
         for file in z.filelist:
@@ -226,7 +228,7 @@ def retrievetags(type):
                     #     if dictart not in articles:
                     #         articles.append(dictart)             
             except:
-                #traceback.print_exc()
+                traceback.print_exc()
                 continue
             
 
@@ -249,22 +251,51 @@ def retrievekeywords():
     for article in data:
         article_id = article['id']
         myid = article['myid']
-        try:
-           keywords = article['yaml']['keywords']
-           for k in keywords:
-               if k['lang'] == 'fr':
-                   for kf in k['list_f']:
-                       try:
-                           title=article['title']
-                       except:
-                           title=''
-                       articles_list={'myid':myid, 'id':article_id, 'title':title}
-                       nameslug=slugify(kf)
-                       dictkey = {'name': kf, 'nameslug':nameslug,'articles': articles_list}
-
-                       key_fr.append(dictkey)
-        except:
-            continue
+        keywords = article['yaml']['keywords']
+        for k in keywords:
+            for kf in k['list_f']:
+                title = article['title']
+                yaml = article['yaml']
+                authors = yaml['authors']
+                # print(authors)
+                myauthors = makeauthors(article)
+                # print(f"myauthors: {myauthors}")
+                authors = formatnameslinks(myauthors)
+                nameslug=slugify(kf)
+                date = formatDate(article['yaml']['date'])
+                articles_list={'myid':myid, 'id':article_id, 'title':title, 'authors':authors, 'date':date}
+                dictkey = {'name': kf, 'nameslug':nameslug,'articles': articles_list}
+                key_fr.append(dictkey)
+        # try:
+        #     keywords = article['yaml']['keywords']
+        #     for k in keywords:
+        #         if k['lang'] == 'fr':
+        #             for kf in k['list_f']:
+        #                 try:
+        #                     title=article['title']
+        #                 except:
+        #                     title=''
+        #                 try:
+        #                     authors = article['authors']
+        #                     # authors = formatnames(makeauthors(article))
+        #                     myauthors = makeauthors(article)
+        #                     # print(f"authors: {myauthors}")
+        #                     authors = formatnameslinks(myauthors)
+        #                     # display = getdisplay(authors, title)
+        #                     # print(f"authors: {authors}, myauthors: {myauthors}")
+        #                 except Exception as e:
+        #                     authors=''
+        #                     print(f"Exception: {e}")
+        #                 try:
+        #                     date = formatDate(article['date'])
+        #                 except:
+        #                     date=''
+        #                 articles_list={'myid':myid, 'id':article_id, 'title':title, 'authors':authors, 'display':display, 'date':date}
+        #                 nameslug=slugify(kf)
+        #                 dictkey = {'name': kf, 'nameslug':nameslug,'articles': articles_list}
+        #                 key_fr.append(dictkey)
+        # except:
+        #     continue
                 
     return key_fr
 def retrievedossiers():
@@ -274,14 +305,24 @@ def retrievedossiers():
         myid = article['myid']
         dossier = article['yaml']['dossier']
         title= article['title']
-        authors = formatnameslinks(makeauthors(article))
-        display = getdisplay(makeauthors(article), title)
+        yaml = article['yaml']
+        authors = yaml['authors']
+        # print(authors)
+
+        myauthors = makeauthors(article)
+        # print(f"myauthors: {myauthors}")
+        authors = formatnameslinks(myauthors)
+        # print(f"authors: {authors}")
+        # display = getdisplay(myauthors, title)
+        display = "placeholder"
         keywords = formatkeywords(article['yaml']['keywords'])
         try:
             date = formatDate(article['yaml']['date'])
         except:
             date = ""
-       
+
+        # print(f"authors: {authors}; myauthors: {myauthors}")
+        # display = ""
         # print(article['authors'])
         articles_list={'myid':myid,'id':article_id, 'title':title, 'display':display, 'authors':authors, 'keywords':keywords, 'date':date, 'yaml':article['yaml']}
         dictdossier = {'dossier': dossier[0], 'articles': articles_list}
@@ -305,23 +346,64 @@ def formatDate(date):
     else:
         return date[1] + "." + date[0]
 
+def displayName(author):
+    # print(f"Author ({author}) > 1 : {len(author)>1}")
+    # print(f"surname: {author['author']['surname']}")
+    try:
+        surname = author['author']['surname']
+    except Exception as e:
+        surname = ""
+        print(f"Exception: {e}")
+    
+    try:
+        forname = author['author']['forname']
+    except Exception as e:
+        forname = ""
+        print(f"Exception: {e}")
+    
+    name = forname + " " + surname
+    
+    # print(f"name = {name}")
+
+    return name
+
 def getdisplay(authors, title):
     authors_list = []
+
     for author in authors:
+        # print(f"Author = {author}")
         try:
-            surname = author['author']['surname']
-        except:
+            if author['surname'] is not None:
+                surname = author['surname']
+            else:
+                surname = ""
+        except Exception as e:
             surname = ""
+            print(f"Exception: {e}")
+        
         try:
-            forname = author['author']['forname']
-        except:
+            if author['forname'] is not None:
+                forname = author['forname']
+            else:
+                forname = ""
+        except Exception as e:
             forname = ""
+            print(f"Exception: {e}")
+        
         name = forname + " " + surname
+
+        if name == " ":
+             name = "no name"
+            #  print(f"title: {title}")
+
+        # print(f"name: {name}")
 
         dictauthor = {'name':name}
         authors_list.append(dictauthor)
-        
+
     names = formatnames(authors_list)
+
+    # print(names)
 
     return names + title
 def formatnames(authors):
@@ -339,8 +421,9 @@ def formatnames(authors):
 
 def formatnameslinks(authors):
     names = []
+    # print(f"authors: {authors}")
     for author in authors:
-        name = "<a href=" + "/auteurices/{}.html>{}</a>".format(author['authorslug'], author['author']["forname"] + " " + author['author']["surname"])
+        name = "<a href=" + "/auteurices/{}.html>{}</a>".format(author['authorslug'], displayName(author))
         names.append(name)
     if len(names) > 2:
         names = ", ".join(names[:-1]) + " et " + names[-1]
@@ -366,18 +449,52 @@ def retrieveauthors():
                     author.update({'forname':""})
                     authorslug = slugify(author['surname'])
                     # print(authorslug)
-                if author['forname'] and author['surname'] != "":
+                if author['forname'] != "" and author['surname'] != "":
                     authornslug = slugify(author['surname'])
                     authorfslug = slugify(author['forname'])
                     authorslug= authornslug+'-'+authorfslug
                     # print(authorslug)
-                print(f"author = {author} has authorslug = {authorslug}")
+                # print(f"author = {author} has authorslug = {authorslug}")
                 dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
                 authors_list.append(dictauthor)
         except:
-            continue
+            continue    
+    return authors_list
 
-     
+def testAuthors(article):
+    authors_list=[]
+    
+
+    data = retrievetags("article")
+    for article in data:
+        if article['myid'] == "01-recom":
+            article_id = article['id']
+            myid = article['myid']
+            authors = article['authors']
+            for author in authors:
+                    title= article['title']
+                    articles_list={'myid':myid,'id':article_id, 'title':title}
+                    if 'surname' not in author or author['surname'] == "":
+                        author.update({'surname':""})
+                        authorslug = slugify(author['forname'])
+                        # print(f"authorslug = {authorslug}, surname = {author['surname']}")
+                    if 'forname' not in author or author['forname'] == "":
+                        author.update({'forname':""})
+                        authorslug = slugify(author['surname'])
+                        # print(f"authorslug = {authorslug}, forname = {author['forname']}")
+                        # print(authorslug)
+                    if author['forname'] and author['surname'] != "":
+                        authornslug = slugify(author['surname'])
+                        authorfslug = slugify(author['forname'])
+                        authorslug= authornslug+'-'+authorfslug
+                        # print(f"authorslug = {authorslug}, forname = {author['forname']}, surname = {author['surname']}")
+                        # print(authorslug)
+                    dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
+                    authors_list.append(dictauthor)
+            # print(authors_list)
+        else:
+            # print("None")
+            continue
     return authors_list
 
 def makeauthors(article):
@@ -407,8 +524,10 @@ def makeauthors(article):
             dictauthor = {'author': author, 'authorslug':authorslug, 'articles': articles_list}
             authors_list.append(dictauthor)
     except Exception as e:
-        print("Exception:")
-        print(e)
+        if ("authorslug" not in e.args[0]):
+            print("Got exception: no authorslug")
+            # print("Exception:")
+            # print(e)
         pass
      
     return authors_list
@@ -428,7 +547,8 @@ def setkeywords():
                 dictk.update({'nameslug':kw['nameslug']})
         dictk.update({'articles':lista })        
         liste_sd.append(dictk)    
-    return liste_sd    
+    return liste_sd  
+  
 def setdossiers():
     dossiers = retrievedossiers()
     dossierssorted = sortArticles()
@@ -503,6 +623,7 @@ def setauthors():
     seen = []
     new_l = []
     for a in authorssorted:
+        # print(a['author'])
         if 'surname' not in a['author']:
             a['author'].update({'surname':""})
         if 'forname' not in a['author']:

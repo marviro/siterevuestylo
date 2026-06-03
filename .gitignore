@@ -8,7 +8,7 @@ __pycache__/
 .ipynb_checkpoints
 static/media/media_articles
 /templates/TODO.md
-downloads/
+downloads*/
 archive_bsp/
 TODO.md
 static/lampadaire.bib
@@ -19,3 +19,6 @@ TODO
 .vscode/
 build_archive/
 static/pages/contribuer.md
+colors
+test.html
+test2.html
